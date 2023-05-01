@@ -1,0 +1,52 @@
+﻿@*@model IEnumerable<WebApplication1.Models.Customer>*@
+@model WebApplication1.ViewModels.CustomerViewModel
+
+<h1>
+    Customer
+</h1>
+<div>
+    <div>
+        <label style="font-size: 30px;">Id:</label>
+        <label style="font-size: 30px;"><strong>@Model.Customer.CustomerId</strong></label>
+    </div>
+    <div>
+        <label style="font-size: 30px;">Name:</label>
+        <label style="font-size: 30px;"><strong>@Model.Customer.CustomerName</strong></label>
+    </div>
+    <div>
+        <label style="font-size: 30px;">Description:</label>
+        <label style="font-size: 30px;"><strong>@Model.Customer.Description</strong></label>
+    </div>
+    <div>
+        <label style="font-size: 30px;">Customer Id:</label>
+        <label style="font-size: 30px;"><strong>@Model.Customer.CustomerId</strong></label>
+    </div>
+    <img src="@Model.Customer.ImageUrl" alt="@Model.Customer.ImageUrl" width="600" height="600">
+    <p>&nbsp;</p>
+    <h1>
+        Orders:
+    </h1>
+    <!-- foreach order in orders-->
+    @foreach (var order in Model.Customer.Orders)
+    {
+        <p>&nbsp;</p>
+        <div class="col">
+            <div>
+                <label style="font-size: 30px;">Order Id:</label>
+                <label style="font-size: 30px;"><strong>@order.OrderId</strong></label>
+            </div>
+            <div>
+                <label style="font-size: 30px;">Order Name:</label>
+                <label style="font-size: 30px;"><strong>@order.OrderName</strong></label>
+            </div>
+            <div>
+                <label style="font-size: 30px;">Order Description:</label>
+                <label style="font-size: 30px;"><strong>@order.OrderDescription</strong></label>
+            </div>
+            <div>
+                <label style="font-size: 30px;">Active:</label>
+                <label style="font-size: 30px;"><strong>@order.IsActive</strong></label>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,87 @@
+﻿
+<!--Denis note: attempt 1: old-school using MVC Model/View, in lline below removed at-sign from the model otherwise won't compile, because I am show what I am doing the second way
+<1-- model IEnumerable<WebApplication1.Models.Pie> -->
+<!--second way - newer, usine View Model on MVS as a mode on the view and accessing ViewModel's multiple properties-->
+@model WebApplication1.ViewModels.CustomerListViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+    <title> Denis Morozov MVC Workshop</title>
+</head>
+<body>
+    @*    -------------------------------------------------------------------------------------------------------
+    denis note: attempt 1 - simple MVC old-school binding to a model -  to render, uncomment line 8 as well
+    -------------------------------------------------------------------------------------------------------
+    <div>
+    <h1>@ViewBag.CurrentCategory</h1>
+    @foreach (var m in Model)
+    {
+    <div>
+    <h2>@m.CustomerId</h2>
+    <h2>@m.CustomerName</h2>
+    </div>
+    }
+    </div>*@
+    <div>
+        <h1>@Model.Title</h1>   @* Denis note: see now I am using a property on the View.ViewModel*@
+        @*<p>denis note: attempt 1 is commented out in HTML file, so not rendering, it uses old school MVC Model binding to render</p>
+        <p>...</p>
+        <p>-----------------------------------------------------------------------------------------------------------------------------</p>
+        <p>denis note: attempt 2 with MVC using ViewModel and accessing it's multiple properties, which is what I am used to in the MVVM'</p>
+        <p>-----------------------------------------------------------------------------------------------------------------------------</p>
+
+        <label for="activeCustomersDropDown">Choose active customer:</label>
+        <select id="activeCustomersDropDown" name="activeCustomersDropDown">
+            @foreach (var c in Model.Customers)
+            {
+                <option value="@c.CustomerId" data-image="@Url.Content(c.ImageUrl)">
+                    @c.CustomerName
+                </option>
+            }
+        </select>
+        <img id="current-active-customer-image" src="" alt="" width="100" height="100" />
+        @section Scripts {
+            <script>
+                $(function () {
+                    $('#activeCustomersDropDown').on('change', function () {
+                        var imageUrl = $(this).find(':selected').data('image');
+                        $('#current-active-customer-image').attr('src', imageUrl);
+                    });
+                });
+            </script>
+        }*@
+    </div>
+
+    <div>
+@*      <p>-----------------------------------------------------------------------------------------------------------------------------</p>
+        <p>denis note: attempt 3 trying to style - man, I can do this in WPF in 1 min, jeez, so rusty on HTML</p>
+        <p>-----------------------------------------------------------------------------------------------------------------------------</p>
+*@        @foreach (var customer in Model.Customers)
+        {
+            <div class="col">
+                <div>
+                    <h2 class="text-start">
+                        <a class="pie-link" asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerId">@customer.CustomerName</a>
+                    </h2>
+                    <div class="card-body pie-button">
+                        <h4 class="d-grid"></h4>
+                        <div class="d-flex justify-content-between mt-2">
+                            <h2 class="text-start">
+                                <a asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerId">
+                                    <img src="@customer.ImageUrl" alt="@customer.CustomerName" width="200" height="200">
+                                </a>
+                            </h2>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+        }
+    </div>
+    <div>
+  </div>
+</body>
+</html>

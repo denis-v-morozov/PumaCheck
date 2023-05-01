@@ -1,0 +1,47 @@
+﻿@*@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+
+@model WebApplication1.ViewModels.HomeViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+    <title> Denis Morozov MVC Workshop</title>
+</head>
+<body>
+    <div>
+        @foreach (var customer in Model.AllCustomers)
+        {
+            <div class="col">
+                <div>
+                    <h2 class="text-start">
+                        <a class="pie-link" asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerId">@customer.CustomerName</a>
+                    </h2>
+                    <div class="card-body pie-button">
+                        <h4 class="d-grid"></h4>
+                        <div class="d-flex justify-content-between mt-2">
+                            <h2 class="text-start">
+                                <a asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerId">
+                                    <img src="@customer.ImageUrl" alt="@customer.CustomerName" width="200" height="200">
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>&nbsp;</p>        }
+    </div>
+    <div>
+    </div>
+</body>
+</html>
+
